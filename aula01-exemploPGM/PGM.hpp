@@ -50,7 +50,7 @@ void criar(PGM *pgm, int largura, int altura)
 {
     if (pgm->pixels)
         delete pgm->pixels;
-    
+
     int tamanho = largura * altura;
 
     pgm->tipo = "P2";
@@ -94,7 +94,6 @@ bool gravar(PGM *pgm, string caminho)
     arq.close();
     return true;
 }
-
 
 string lerLinhaArquivo(std::ifstream &arq)
 {
@@ -185,7 +184,6 @@ bool ler(PGM *pgm, string caminho)
     return true;
 }
 
-
 unsigned char getPixel(PGM *pgm, int x, int y)
 {
     if (!pgm->pixels)
@@ -202,11 +200,11 @@ void setPixel(PGM *pgm, int x, int y, unsigned char cor)
 }
 
 // ex4: criar c/ cor
-void exer4(PGM *pgm, int largura, int altura, unsigned char corFundo)
+void criar_com_cor(PGM *pgm, int largura, int altura, unsigned char corFundo)
 {
     if (pgm->pixels)
         delete pgm->pixels;
-    
+
     int tamanho = largura * altura;
 
     pgm->tipo = "P2";
@@ -221,7 +219,7 @@ void exer4(PGM *pgm, int largura, int altura, unsigned char corFundo)
 }
 
 // ex5: setlinha
-void exer5(PGM *pgm, int linha, unsigned char cor)
+void setLinha(PGM *pgm, int linha, unsigned char cor)
 {
     if (!pgm->pixels)
         return;
@@ -233,7 +231,7 @@ void exer5(PGM *pgm, int linha, unsigned char cor)
 }
 
 // ex6: coordValida
-bool exer6(PGM *pgm, int x, int y)
+bool coordValida(PGM *pgm, int x, int y)
 {
     bool valida = true;
 
@@ -242,5 +240,143 @@ bool exer6(PGM *pgm, int x, int y)
 
     return valida;
 }
+
+// ex7: preencher regiao
+void preencheRegiao(PGM *pgm, int x1, int y1, int x2, int y2, unsigned char cor)
+{
+    // Garantir que x1 <= x2 e y1 <= y2
+    if (x1 > x2)
+    {
+        int aux = x1;
+        x1 = x2;
+        x2 = aux;
+    }
+
+    if (y1 > y2)
+    {
+        int aux = y1;
+        y1 = y2;
+        y2 = aux;
+    }
+
+    // Verificar se as coordenadas são válidas
+    if (!coordValida(pgm, x1, y1) || !coordValida(pgm, x2, y2))
+    {
+        cout << "Coordenadas invalidas!" << endl;
+        return;
+    }
+
+    // Preencher a região
+    for (int y = y1; y <= y2; y++)
+    {
+        for (int x = x1; x <= x2; x++)
+        {
+            setPixel(pgm, x, y, cor);
+        }
+    }
+}
+
+// ex9: inverter verticalmente
+void flipVertical(PGM *pgm)
+{
+    int j = pgm->alt;
+    for (int i = 0; i < pgm->alt / 2; i++)
+    {
+        j--;
+        for (int x = 0; x < pgm->larg; x++)
+        {
+            unsigned char temp = pgm->pixels[i * pgm->larg + x];
+            pgm->pixels[i * pgm->larg + x] = pgm->pixels[j * pgm->larg + x];
+            pgm->pixels[j * pgm->larg + x] = temp;
+        }
+    }
+}
+
+// ex10: copiar região
+void copiarRegiao(PGM *pgm1, PGM *pgm2, int p1[], int p2[])
+{
+    int x1 = p1[0], x2 = p2[0], y1 = p1[1], y2 = p2[1];
+
+    if (x1 > x2)
+    {
+        int aux = x1;
+        x1 = x2;
+        x2 = aux;
+    }
+
+    if (y1 > y2)
+    {
+        int aux = y1;
+        y1 = y2;
+        y2 = aux;
+    }
+
+    // Verificar se as coordenadas são válidas
+    if (!coordValida(pgm1, x1, y1) || !coordValida(pgm1, x2, y2))
+    {
+        cout << "Coordenadas invalidas!" << endl;
+        return;
+    }
+
+    // Preencher a região
+    for (int y = y1; y <= y2; y++)
+    {
+        for (int x = x1; x <= x2; x++)
+        {
+            setPixel(pgm2, x, y, getPixel(pgm1, x, y));
+        }
+    }
+}
+
+// ex11: desenhar borda
+void desenhaBorda(PGM *pgm, int espessura, unsigned char cor)
+{
+    if (espessura <= 0 || espessura > 10 || espessura >= pgm->larg || espessura >= pgm->alt)
+    {
+        cout << "\nnERRO: Não é possível criar uma borda desse tamanho!\n";
+        return;
+    }
+
+    // Desenha borda superior e inferior
+    for (int j = 0; j < espessura; j++)
+    {
+        for (int i = 0; i < pgm->larg; i++)
+        {
+            // Superior
+            setPixel(pgm, i, j, cor);
+            // Inferior
+            setPixel(pgm, i, pgm->alt - 1 - j, cor);
+        }
+    }
+
+    // Desenha borda esquerda e direita
+    for (int i = 0; i < espessura; i++)
+    {
+        for (int j = 0; j < pgm->alt; j++)
+        {
+            // Esquerda
+            setPixel(pgm, i, j, cor);
+            // Direita
+            setPixel(pgm, pgm->larg - 1 - i, j, cor);
+        }
+    }
+}
+
+// ex12: desenhar X
+void desenharX(PGM *pgm, unsigned char cor)
+{
+    for (int i = 0; i < pgm->larg; i++)
+    {
+        for (int j = 0; j < pgm->alt; j++)
+        {
+            // Cálculo das diagonais principal e secundária
+            if (i == j || i + j == pgm->larg - 1)
+            {
+                setPixel(pgm, i, j, cor);
+            }
+        }
+    }
+}
+
 
 #endif
