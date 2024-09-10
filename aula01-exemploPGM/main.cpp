@@ -36,17 +36,23 @@ int main(void)
 	setPixel(&img3, 1, 1, 255); //alterar a cor do pixel(1,1) para branco(255)
 	gravar(&img3, "exemplo3.pgm"); //gravar o resultado no disco
 	destruir(&img3);
-	*/
+*/
 //##################################################################
-/*
+
 	//Exercício 4
 	PGM img4;
 	unsigned char cor;
 	cor = 128;	// cinza
-	cout << "\n\n#Exercicio 4 - Criar com cor#\n";
+	cout << "#Exercicio 4 - Criar com cor#\n";
 	criar_com_cor(&img4, 10, 10, cor);	// funcao exer4
 	gravar(&img4, "exer4.pgm"); //gravar o resultado no disco
 	destruir(&img4);
+
+	cout << "\nImagem criada com sucesso - exer4.pgm\n";
+	
+	cout << "\nPressione qualquer tecla para continuar...";
+	getchar();
+	system("cls");
 //##################################################################
 
 	// Exercício 5
@@ -54,10 +60,16 @@ int main(void)
 	cor = 0;
     criar_com_cor(&img5, 20, 20, cor);
     cor = 255;
-	cout << "\n\n#Exercicio 5 - Setar linha#\n";
+	cout << "#Exercicio 5 - Setar linha#\n";
     setLinha(&img5, 5, cor);	// funcao exer5
     gravar(&img5, "exer5.pgm");
     destruir(&img5);
+
+	cout << "\nImagem alterada (set linha) com sucesso - exer5.pgm\n";
+	
+	cout << "\nPressione qualquer tecla para continuar...";
+	getchar();
+	system("cls");
 //#######################################################
 
 	// Exercício 6
@@ -67,8 +79,7 @@ int main(void)
 	
 	criar(&img6, x, y);
 
-
-	cout << "\n\n#Exercicio 6 - Validar coordenadas#\n";
+	cout << "#Exercicio 6 - Validar coordenadas#\n";
 	
 	cout << "\nInsira o x: ";
 	cin >> x;
@@ -82,8 +93,14 @@ int main(void)
 		cout << "\nCoordenada valida!" << endl;
 	else
 		cout << "\nCoordenada invalida!" << endl;
-
 	destruir(&img6);
+
+	cout << "\nValidacao de coordenadas concluida\n";
+	
+	cout << "\nPressione qualquer tecla para continuar...";
+	getchar();
+	system("cls");
+
 //##########################################################
 
 	// Exercicio 7
@@ -99,11 +116,17 @@ int main(void)
 	int x2 = 8;
 	int y2 = 10;
 
-	cout << "\n\n#Exercicio 7 - Preencher regiao#\n";
+	cout << "#Exercicio 7 - Preencher regiao#\n";
 	preencheRegiao(&img7, x1, y1, x2, y2, cor); 	// funcao exer7
 	gravar(&img7, "exer7.pgm");
 
 	destruir(&img7);
+
+	cout << "\nImagem alterada com sucesso (preencher regiao) - exer7.pgm\n";
+	
+	cout << "\nPressione qualquer tecla para continuar...";
+	getchar();
+	system("cls");
 
 //###########################################################
 
@@ -122,9 +145,15 @@ int main(void)
 		i++;
 	}
 
-	cout << "\n\n#Exercicio 8 - Setar linhas brancas#\n";
+	cout << "#Exercicio 8 - Setar linhas brancas#\n";
 	gravar(&img8, "exer8.pgm");
 	destruir(&img8);
+
+	cout << "\nImagem alterada com sucesso (setar linhas brancas) - exer8.pgm\n";
+	
+	cout << "\nPressione qualquer tecla para continuar...";
+	getchar();
+	system("cls");
 
 //###############################################################
 
@@ -134,14 +163,20 @@ int main(void)
 
 	flipVertical(&img9);
 
-	cout << "\n\n#Exercicio 9 - Inverter verticalmente#\n";
+	cout << "#Exercicio 9 - Inverter verticalmente#\n";
 	gravar(&img9, "exer9.pgm");
 	destruir(&img9);
+
+	cout << "\nImagem invertida com sucesso - exer9.pgm\n";
+	
+	cout << "\nPressione qualquer tecla para continuar...";
+	getchar();
+	system("cls");
 
 //#################################################################
 
 	// Exercício 10
-	cout << "\n\n#Exercicio 10 - Copiar regiao#\n";
+	cout << "#Exercicio 10 - Copiar regiao#\n";
 	
 	PGM imgBase;
 	PGM img10;
@@ -157,17 +192,21 @@ int main(void)
 
 	copiarRegiao(&imgBase, &img10, p1, p2);
 
-	// gravação da imagem em disco
 	gravar(&img10, "exer10.pgm");
 
-	// desaloca memória
 	destruir(&imgBase);
 	destruir(&img10);
+
+	cout << "\nImagem alterada com sucesso (copia regiao) - exer10.pgm\n";
 	
+	cout << "\nPressione qualquer tecla para continuar...";
+	getchar();
+	system("cls");
+
 //#####################################################################
 
 	// Exercício 11
-	cout << "\n\n#Exercicio 11 - Desenhar borda#\n";
+	cout << "#Exercicio 11 - Desenhar borda#\n";
 
 	PGM img11;
 
@@ -175,10 +214,18 @@ int main(void)
 	desenhaBorda(&img11, 5, 255);
 	gravar(&img11, "exer11.pgm");
 
+	destruir(&img11);
+
+	cout << "\nImagem alterada com sucesso (desenhar borda) - exer11.pgm\n";
+	
+	cout << "\nPressione qualquer tecla para continuar...";
+	getchar();
+	system("cls");
+
 //#####################################################################
 
 	// Exercício 12
-	cout << "\n\n#Exercicio 12 - Desenhar X#\n";
+	cout << "#Exercicio 12 - Desenhar X#\n";
 
 	PGM img12;
 	criar_com_cor(&img12, 100, 100, 0);	// criação de imagem preta
@@ -187,12 +234,104 @@ int main(void)
 	gravar(&img12, "exer12.pgm");
 
 	destruir(&img12);
-*/
+
+	cout << "\nImagem alterada com sucesso (desenhar X) - exer12.pgm\n";
+	
+	cout << "\nPressione qualquer tecla para continuar...";
+	getchar();
+	system("cls");
 //######################################################################
 
 	// Exercício 13
+	cout << "Exercicio 13 - Combinar imagens#\n";
 	
+	PGM img13a;
+	PGM img13b;
+	PGM img13;
 
+	int opcao;
+	do {
+		cout << "########## MENU ##########\n";
+		cout << "#        0. Sair         #\n";
+		cout << "#        1. Media        #\n";
+		cout << "#        2. Maior        #\n";
+		cout << "#        3. Menor        #\n";
+		cout << "##########################\n";
+		cout << "\nSua opcao: ";
+		cin >> opcao;
+		fflush(stdin);
+
+		if (opcao < 0 || opcao > 3)
+		{
+			cout << "Opcao invalida!\n";
+		}
+		else if (opcao == 0)
+		{
+			break;
+		}
+		else
+		{
+			ler(&img13a, "img-base.pgm");
+			ler(&img13b, "img-base2.pgm");
+			criar(&img13, img13a.larg, img13a.alt);
+			combinarImagens(&img13a, &img13b, &img13, opcao);
+			gravar(&img13, "exer13.pgm");
+
+			cout << "\nImagem criada com sucesso!\n";
+		}
+		destruir(&img13);
+		destruir(&img13a);
+		destruir(&img13b);
+
+		cout << "Para visualizar, basta procurar pela imagem 'exer13.pgm'...\nPara continuar a execucao, pressione qualquer tecla...\n";
+		getchar();
+		system("cls");
+
+	}while(opcao > 0 && opcao <= 3);
+
+	cout << "\nExercicio 13 concluido - exer13.pgm\n";
+	
+	cout << "\nPressione qualquer tecla para continuar...";
+	getchar();
+	system("cls");
+
+//######################################################################
+
+// Exercício 14
+	cout << "#Exercicio 14 - Desenhar borda#\n";
+
+	PGM img14;
+	ler(&img14, "img-base2.pgm");
+	criarBorda(&img14, 100, 300, 100, 300, 255);
+	gravar(&img14, "exer14.pgm");
+
+	cout << "\nImagem gerada com sucesso - exer14.pgm!\n";
+
+	cout << "\nPressione qualquer tecla para continuar...";
+	getchar();
+	system("cls");
+
+
+
+	destruir(&img14);
+
+// ######################################################################
+
+	// Exercício 15
+	cout << "#Exercicio 15 - Converter tons de cinza#\n";
+
+	PGM img15;
+	ler(&img15, "img-base.pgm");
+	converteCinza(&img15);
+	gravar(&img15, "exer15.pgm");
+
+	cout << "\nImagem gerada - tons de cinza convertidos - exer15.pgm\n";
+
+	destruir(&img15);
+
+	cout << "\nPressione qualquer tecla para continuar...";
+	getchar();
+	system("cls");
 	
 	cout << "Pressione uma tecla para encerrar o programa.\n";
 	getchar();

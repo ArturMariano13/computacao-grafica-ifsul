@@ -378,5 +378,65 @@ void desenharX(PGM *pgm, unsigned char cor)
     }
 }
 
+// ex13: combinar imagens
+void combinarImagens(PGM *pgm1, PGM *pgm2, PGM *pgmComb, int combinacao)
+{
+    // Itera sobre cada pixel da imagem
+    for (int i = 0; i < pgm1->larg; i++)
+    {
+        for (int j = 0; j < pgm1->alt; j++)
+        {
+            // Pega o valor do pixel nas imagens pgm1 e pgm2
+            int pixel1 = getPixel(pgm1, i, j);
+            int pixel2 = getPixel(pgm2, i, j);
+            int valorComb;
+
+            // Combina os pixels de acordo com a opção de combinação
+            if (combinacao == 1)
+            {
+                valorComb = (pixel1 + pixel2) / 2;
+            }
+            else if (combinacao == 2)
+            {
+                valorComb = max(pixel1, pixel2);
+            }
+            else
+            {
+                valorComb = min(pixel1, pixel2);
+            }
+            setPixel(pgmComb, i, j, valorComb);
+        }
+    }
+}
+
+// ex14: criar borda em determinada região
+void criarBorda(PGM *pgm, int x1, int x2, int y1, int y2, unsigned char cor)
+{
+    for (int i = x1; i <= x2; i++)
+    {
+        for (int j = y1; j <= y2; j++)
+        {
+            if (i == x1 || i == x2 || j == y1 || j == y2)
+            {
+                setPixel(pgm, i, j, cor);
+            }
+            
+        }
+    }
+}
+
+void converteCinza(PGM *pgm)
+{
+    for (int i = 0; i < pgm->larg; i++)
+    {
+        for (int j = 0; j < pgm->alt; j++)
+        {
+            if (getPixel(pgm, i, j) > 128)
+                setPixel(pgm, i, j, 255);
+            else
+            setPixel(pgm, i, j, 0);
+        }
+    }
+}
 
 #endif
