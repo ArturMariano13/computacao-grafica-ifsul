@@ -235,7 +235,7 @@ bool coordValida(PGM *pgm, int x, int y)
 {
     bool valida = true;
 
-    if (pgm->larg < x || pgm->alt < y)
+    if (pgm->larg <= x || pgm->alt <= y)
         valida = false;
 
     return valida;
