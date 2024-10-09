@@ -58,4 +58,25 @@ Matrix3f getShear(float s, char mode)
     return M;
 }
 
+Matrix3f getReflection(char axis)
+{
+    Matrix3f M = Matrix3f::Identity();
+
+    if (toupper(axis) == 'X')
+    {
+        M(1,1) = -1;
+    } 
+    else if (toupper(axis) == 'Y')
+    {
+        M(0,0) = -1;
+    }
+    else
+    {
+        std::cout << "\nError getReflection: invalid axis!\n";
+        return Matrix3f::Zero();
+    }
+
+    return M;
+}
+
 #endif
